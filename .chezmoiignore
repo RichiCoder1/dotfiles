@@ -1,0 +1,4 @@
+{{ if not (contains "microsoft-standard" .chezmoi.kernel.osrelease) }}
+resolv.conf.add
+{{ end }}
+settings.json
