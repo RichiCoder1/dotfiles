@@ -1,4 +1,5 @@
 {{ if not (contains "microsoft-standard" .chezmoi.kernel.osrelease) }}
-resolv.conf.add
+.resolv.conf.add
 {{ end }}
 settings.json
+README.md
