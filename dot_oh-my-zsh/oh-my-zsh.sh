@@ -61,6 +61,18 @@ if [ -z "$ZSH_COMPDUMP" ]; then
   ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
 fi
 
+# Construct zcompdump OMZ metadata
+zcompdump_metadata="\
+#omz revision: $(builtin cd -q "$ZSH"; git rev-parse HEAD 2>/dev/null)
+#omz fpath: $fpath\
+"
+
+# Delete the zcompdump file if OMZ zcompdump metadata changed
+if ! cmp -s <(command grep '^#omz' "$ZSH_COMPDUMP" 2>/dev/null) <(echo "$zcompdump_metadata"); then
+  command rm -f "$ZSH_COMPDUMP"
+  zcompdump_refresh=1
+fi
+
 if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
   source $ZSH/lib/compfix.zsh
   # If completion insecurities exist, warn the user
@@ -71,6 +83,13 @@ else
   # If the user wants it, load from all found directories
   compinit -u -C -d "${ZSH_COMPDUMP}"
 fi
+
+# Append zcompdump metadata if missing
+if (( $zcompdump_refresh )); then
+  echo "\n$zcompdump_metadata" | tee -a "$ZSH_COMPDUMP" &>/dev/null
+fi
+
+unset zcompdump_metadata zcompdump_refresh
 
 
 # Load all of the config files in ~/oh-my-zsh that end in .zsh
@@ -97,25 +116,12 @@ done
 unset config_file
 
 # Load the theme
-if [[ "$ZSH_THEME" == "random" ]]; then
-  if [[ "${(t)ZSH_THEME_RANDOM_CANDIDATES}" = "array" ]] && [[ "${#ZSH_THEME_RANDOM_CANDIDATES[@]}" -gt 0 ]]; then
-    themes=($ZSH/themes/${^ZSH_THEME_RANDOM_CANDIDATES}.zsh-theme)
+if [ ! "$ZSH_THEME" = ""  ]; then
+  if [ -f "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme" ]; then
+    source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
+  elif [ -f "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme" ]; then
+    source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
   else
-    themes=($ZSH/themes/*zsh-theme)
-  fi
-  N=${#themes[@]}
-  ((N=(RANDOM%N)+1))
-  RANDOM_THEME=${themes[$N]}
-  source "$RANDOM_THEME"
-  echo "[oh-my-zsh] Random theme '$RANDOM_THEME' loaded..."
-else
-  if [ ! "$ZSH_THEME" = ""  ]; then
-    if [ -f "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme" ]; then
-      source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
-    elif [ -f "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme" ]; then
-      source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
-    else
-      source "$ZSH/themes/$ZSH_THEME.zsh-theme"
-    fi
+    source "$ZSH/themes/$ZSH_THEME.zsh-theme"
   fi
 fi
