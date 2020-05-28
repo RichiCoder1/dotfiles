@@ -1,5 +1,5 @@
-# Add glooctl
-PATH=$HOME/.gloo/bin:$PATH
+# Add go
+PATH=/usr/local/go/bin:$PATH
 
 # Add general tools to path
 PATH="$HOME/bin:$PATH"
