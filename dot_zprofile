@@ -1,5 +1,5 @@
 # Add go
-PATH="/usr/local/go/bin:$PATH"
+PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 
 # Add general tools to path
 PATH="$HOME/bin:$PATH"
