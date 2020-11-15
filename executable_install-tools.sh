@@ -46,3 +46,6 @@ sudo apt-get autoremove -yqq
 
 echo "Installing kubectl"
 sudo apt-get install -yqq kubectl
+
+echo "Installing Homebrew"
+yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"

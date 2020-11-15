@@ -1,3 +1,9 @@
 [user]
 	email = "{{ .email }}"
 	name = "{{ .fullname }}"
+[core]
+	editor = code --wait
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
