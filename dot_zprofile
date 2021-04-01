@@ -4,6 +4,9 @@ PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 # Add general tools to path
 PATH="$HOME/bin:$PATH"
 
+# Add krew
+PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 export PATH
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
