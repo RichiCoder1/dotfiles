@@ -10,10 +10,10 @@ sudo curl -sSL https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/p
 sudo chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 
 sudo apt-get update -qq
-sudo apt-get install dotnet-sdk-3.1 -yqq
+sudo apt-get install dotnet-sdk-5.0 -yqq
 
 echo "Upgrading go..."
-GO_VERSION=1.14.3
+GO_VERSION=1.16.2
 if [[ -d /usr/local/go ]] ; then
     # Todo: better update logic
     sudo rm -rf /usr/local/go
