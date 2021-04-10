@@ -2,12 +2,11 @@
 set -e # -e: exit on error
 
 {{- if .codespaces -}}
-# We only need homebrew in Codepsaces
-sudo apt-get update -qq
-
+# We only need homebrew & openconnect in Codespaces
 echo "Installing Homebrew"
 yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
+echo "Installing openconnect"
 sudo apt-get install openconnect
 {{- else -}}
 ./install-tools.sh

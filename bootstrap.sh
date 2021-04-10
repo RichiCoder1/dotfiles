@@ -2,6 +2,8 @@
 
 set -e # -e: exit on error
 
+echo "Setting up chezmoi"
+
 if [ ! "$(command -v chezmoi)" ]; then
   bin_dir="$HOME/.local/bin"
   chezmoi="$bin_dir/chezmoi"
