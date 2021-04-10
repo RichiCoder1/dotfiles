@@ -1,0 +1,8 @@
+#!/bin/sh
+{{- if .codespaces -}}
+# We only need homebrew in Codepsaces
+echo "Installing Homebrew"
+yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+{{- else -}}
+./install-tools.sh
+{{- end -}}
