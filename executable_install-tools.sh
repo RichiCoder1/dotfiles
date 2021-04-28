@@ -47,10 +47,10 @@ sudo apt-get autoremove -yqq
 echo "Installing Homebrew"
 yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
-echo "Installing Starship"
+echo "Installing Starship 🚀"
 brew install starship --force --quiet
 
-echo "Installing kubectl"
+echo "Installing Kubectl"
 sudo apt-get install -yqq kubectl
 
 echo "Install Krew"
@@ -58,3 +58,6 @@ brew install krew --force --quiet
 
 echo "Install openconnect"
 sudo apt-get install openconnect -yqq
+
+echo "Install aws-vault"
+brew install aws-vault --force --quiet
