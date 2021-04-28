@@ -2,7 +2,7 @@
 
 echo "Upgrading system packages..."
 sudo apt-get update -qq
-sudo apt-get install -yqq apt-transport-https ca-certificates curl software-properties-common libssl-dev libffi-dev git wget nano gpg
+sudo apt-get install -yqq build-essentials apt-transport-https ca-certificates curl software-properties-common libssl-dev libffi-dev git wget nano gpg
 
 echo "Upgrading dotnet..."
 curl -sSL -o- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o- | sudo apt-key add -
@@ -44,8 +44,17 @@ sudo apt-get update -qq
 sudo apt-get upgrade -yqq
 sudo apt-get autoremove -yqq
 
+echo "Installing Homebrew"
+yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+echo "Installing Starship"
+brew install starship --force --quiet
+
 echo "Installing kubectl"
 sudo apt-get install -yqq kubectl
 
-echo "Installing Homebrew"
-yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+echo "Install Krew"
+brew install krew --force --quiet
+
+echo "Install openconnect"
+sudo apt-get install openconnect -yqq
