@@ -2,7 +2,7 @@
 
 echo "Upgrading system packages..."
 sudo apt-get update -qq
-sudo apt-get install -yqq build-essentials apt-transport-https ca-certificates curl software-properties-common libssl-dev libffi-dev git wget nano gpg
+sudo apt-get install -yqq build-essentials apt-transport-https ca-certificates curl software-properties-common libssl-dev libffi-dev git wget nano gpg pass gnupg
 
 echo "Upgrading dotnet..."
 curl -sSL -o- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o- | sudo apt-key add -

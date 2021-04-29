@@ -2,5 +2,42 @@
 
 add_newline = false
 
+[aws]
+symbol = "  "
+
+[directory]
+read_only = " "
+
+[git_branch]
+symbol = " "
+
+[golang]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
 [kubernetes]
 disabled = false
+
+[rust]
+symbol = " "
+
+{{ if (eq .chezmoi.os "linux") -}}
+{{   if (contains "microsoft" .chezmoi.kernel.osrelease) -}}
+[custom.genie]
+command = ""
+symbol = ""
+disabled = false
+when = "genie -b"
+format = "[$symbol($output bottle )]($style)"
+
+[custom.genie-out]
+command = "! genie -b"
+disabled = false
+symbol = ""
+style = "red"
+when = "! genie -b"
+format = "[($output $symbol )]($style)"
+{{   end -}}
+{{ end -}}

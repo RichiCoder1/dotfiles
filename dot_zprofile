@@ -13,3 +13,5 @@ PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PATH
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+source "$HOME/.aws-vault"
