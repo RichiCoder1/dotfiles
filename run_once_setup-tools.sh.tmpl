@@ -1,13 +1,22 @@
-#!/bin/sh
-set -e # -e: exit on error
+#!/bin/bash
 
-{{- if .codespaces -}}
+set -e
+
+{{ if .codespaces -}}
 # We only need homebrew & openconnect in Codespaces
 echo "Installing Homebrew"
 yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "Installing openconnect"
 sudo apt-get install openconnect -yqq
-{{- else -}}
+{{ else -}}
 ./install-tools.sh
-{{- end -}}
+
+{{ end -}}
+{{ if (eq .chezmoi.os "linux") -}}
+{{   if (contains "microsoft" .chezmoi.kernel.osrelease) -}}
+if [ ! -L /usr/local/bin/xdg-open ]; then
+    sudo ln -s /usr/bin/wslview /usr/local/bin/xdg-open
+fi
+{{   end -}}
+{{ end -}}

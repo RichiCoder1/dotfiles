@@ -15,3 +15,13 @@ export PATH
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 source "$HOME/.aws-vault"
+
+{{ if (eq .chezmoi.os "linux") -}}
+{{   if (contains "microsoft" .chezmoi.kernel.osrelease) -}}
+code() {
+  /mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code "$@"
+}
+
+BROWSER=wslview
+{{   end -}}
+{{ end -}}
