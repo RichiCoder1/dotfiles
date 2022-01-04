@@ -7,6 +7,9 @@ PATH="$HOME/bin:$PATH"
 # Add dotnet tools
 PATH="$HOME/.dotnet/tools:$PATH"
 
+# Add rust
+PATH="$HOME/.cargo/bin:$PATH"
+
 # Add krew
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
@@ -14,7 +17,7 @@ export PATH
 
 eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-source "$HOME/.aws-vault"
+eval "$(aws-vault --completion-script-zsh)"
 
 {{ if (eq .chezmoi.os "linux") -}}
 {{   if (contains "microsoft" .chezmoi.kernel.osrelease) -}}
