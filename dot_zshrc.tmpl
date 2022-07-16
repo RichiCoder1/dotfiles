@@ -28,10 +28,6 @@ fi
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-# Setup nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
 # Setup asdf
 . $(brew --prefix asdf)/libexec/asdf.sh
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
