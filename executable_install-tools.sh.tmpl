@@ -2,7 +2,11 @@
 
 echo "Upgrading system packages..."
 sudo apt-get update -qq
-sudo apt-get install -yqq build-essentials apt-transport-https ca-certificates curl software-properties-common libssl-dev libffi-dev git wget nano gpg pass gnupg
+sudo apt-get install -yqq build-essentials apt-transport-https ca-certificates curl software-properties-common libssl-dev libffi-dev git wget nano gpg pass gnupg jq ripgrep
+
+echo "Update antigen..."
+mkdir -p "$HOME/.antigen/"
+curl -sL git.io/antigen > "$HOME/.antigen/antigen.zsh"
 
 echo "Upgrading dotnet..."
 curl -sSL -o- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o- | sudo apt-key add -
@@ -13,7 +17,7 @@ sudo apt-get update -qq
 sudo apt-get install dotnet-sdk-6.0 -yqq
 
 echo "Upgrading go..."
-GO_VERSION=1.17.5
+GO_VERSION=1.18.4
 if [[ -d /usr/local/go ]] ; then
     # Todo: better update logic
     sudo rm -rf /usr/local/go
@@ -64,23 +68,26 @@ brew install starship --force --quiet
 echo "Installing Kubectl"
 sudo apt-get install -yqq kubectl
 
-echo "Install Krew"
-brew install krew --force --quiet
-
 echo "Install openconnect"
 sudo apt-get install openconnect -yqq
 
-echo "Install aws-vault"
-brew install aws-vault --force --quiet
-
 echo "Install bitwarden-cli"
 brew install bitwarden-cli --force --quiet
+
+echo "Installing zoxide"
+brew install zoxide --force --quiet
+
+echo "Installing yq"
+brew install yq --force --quiet
 
 echo "Install asdf"
 brew install asdf gpg gawk --force --quiet
 
 echo "Installing asdf plugins"
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf plugin add terraform https://github.com/asdf-community/asdf-hashicorp.git
+asdf plugin-add terraform-ls https://github.com/asdf-community/asdf-hashicorp.git
+asdf plugin-add direnv
 
 {{ if (eq .chezmoi.os "linux") -}}
 {{   if (contains "microsoft" .chezmoi.kernel.osrelease) -}}

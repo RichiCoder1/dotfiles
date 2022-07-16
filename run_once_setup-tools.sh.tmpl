@@ -8,7 +8,7 @@ echo "Installing Homebrew"
 yes | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "Installing openconnect"
-sudo apt-get install openconnect -yqq
+sudo apt-get install openconnect zsh-antigen -yqq
 {{ else -}}
 ./install-tools.sh
 

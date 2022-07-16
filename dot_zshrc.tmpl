@@ -1,6 +1,20 @@
 # User configuration
 export LANG=en_US.UTF-8
 
+# Antigen
+source "$HOME/.antigen/antigen.zsh"
+
+# Antigen plugins
+antigen use oh-my-zsh
+antigen bundle git
+antigen bundle copypath
+antigen bundle copyfile
+antigen bundle command-not-found
+antigen bundle zoxide
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen apply
+
 # Starship prompt
 eval "$(starship init zsh)"
 
@@ -20,6 +34,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Setup asdf
 . $(brew --prefix asdf)/libexec/asdf.sh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
 # Setup volta
 export VOLTA_HOME="$HOME/.volta"

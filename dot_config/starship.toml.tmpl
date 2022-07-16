@@ -2,11 +2,38 @@
 
 add_newline = false
 
+[sudo]
+style = "bold green"
+symbol = "👩‍💻 "
+disabled = false
+
+# Nerd Font Preset
 [aws]
 symbol = "  "
 
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
 [directory]
 read_only = " "
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
 
 [git_branch]
 symbol = " "
@@ -14,14 +41,42 @@ symbol = " "
 [golang]
 symbol = " "
 
+[haskell]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
 [memory_usage]
 symbol = " "
 
-[kubernetes]
-disabled = false
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[package]
+symbol = " "
+
+[python]
+symbol = " "
+
+[spack]
+symbol = "🅢 "
 
 [rust]
 symbol = " "
+# End Nerd Font Preset
 
 {{ if (eq .chezmoi.os "linux") -}}
 {{   if (contains "microsoft" .chezmoi.kernel.osrelease) -}}

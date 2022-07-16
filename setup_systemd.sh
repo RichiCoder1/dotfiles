@@ -12,8 +12,11 @@ sudo tee /etc/genie.ini <<CONF
 [genie]
 secure-path=/lib/systemd:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 unshare=/usr/bin/unshare
-update-hostname=false
+update-hostname=true
+update-hostname-suffix=-wsl
 clone-path=false
 clone-env=WSL_DISTRO_NAME,WSL_INTEROP,WSLENV,DISPLAY,WAYLAND_DISPLAY,PULSE_SERVER
-systemd-timeout=60
+systemd-timeout=240
+resolved-stub=false
+target-warning=true
 CONF
