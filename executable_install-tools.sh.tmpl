@@ -27,18 +27,6 @@ curl -sSL https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz -o /tmp/go.t
     sudo tar -C /usr/local -xzf /tmp/go.tar.gz && \
     rm /tmp/go.tar.gz
 
-echo "Upgrading nvm..."
-NVM_DIR="$HOME/.nvm"
-if [[ -d $NVM_DIR ]] ; then 
-    rm -rf $NVM_DIR
-fi
-(
-  git clone -q https://github.com/nvm-sh/nvm.git "$NVM_DIR"
-  cd "$NVM_DIR"
-  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)` -q
-) && \. "$NVM_DIR/nvm.sh"
-nvm install node
-
 echo "Upgrading rust..."
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile complete --quiet --no-modify-path -y
 
