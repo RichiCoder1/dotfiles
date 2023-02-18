@@ -77,22 +77,3 @@ symbol = "🅢 "
 [rust]
 symbol = " "
 # End Nerd Font Preset
-
-{{ if (eq .chezmoi.os "linux") -}}
-{{   if (contains "microsoft" .chezmoi.kernel.osrelease) -}}
-[custom.genie]
-command = ""
-symbol = ""
-disabled = false
-when = "genie -b"
-format = "[$symbol($output bottle )]($style)"
-
-[custom.genie-out]
-command = "! genie -b"
-disabled = false
-symbol = ""
-style = "red"
-when = "! genie -b"
-format = "[($output $symbol )]($style)"
-{{   end -}}
-{{ end -}}
